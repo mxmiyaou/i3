@@ -1,0 +1,41 @@
+#!/bin/sh
+# ~/.xprofile
+# sourced at boot by ~/.xinitrc and display managers like lightdm
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+export SUDO_ASKPASS="$HOME/.local/bin/drcpass"
+
+[ -d /sbin ] && PATH="$PATH:/sbin"
+[ -d /usr/sbin ] && PATH="$PATH:/usr/sbin"
+[ -d "$HOME/.local/bin" ] && PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+
+xgamma -rgamma 0.70 -ggamma 0.70 -bgamma 0.65 &
+xwallpaper --zoom ~/.config/wall.png &
+xrdb -load ~/.Xresources &
+
+# keyring and polkit daemons
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+gnome-keyring-daemon --start --components=pkcs11 &
+
+## Turn on/off system beep.
+#xset b off
+
+## Set keyboard settings - 250 ms delay and 25 cps (characters per second) repeat rate.
+## Adjust the values according to your preferances.
+xset r rate 250 25
+#setxkbmap -option ctrl:nocaps
+setxkbmap -option caps:hyper
+#setxkbmap -option compose:caps
+
+## Configure touchpad.
+## (Now might be using libinput instead of synaptics.)
+synclient VertEdgeScroll=1 HorizEdgeScroll=1 TapButton1=1 2>/dev/null
+## Disable touchpad while typing.
+#syndaemon -i .5 -K -t -R -d &
+
+# dpms: timeout sleep off
+xset dpms 600 900 1200
+
+#echo "$0" | grep "bash$" >/dev/null && [ -f ~/.bashrc ] && source "$HOME/.bashrc"

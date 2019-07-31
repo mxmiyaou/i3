@@ -1,0 +1,14 @@
+! ------------------------------------------------------------------------------
+! Xft Font Configuration
+! ------------------------------------------------------------------------------
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.autohint: true
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintsfull
+
+Xcursor.theme: Breeze-Snow
+!xscreensaver.fade:   false
+!xscreensaver.unfade: false

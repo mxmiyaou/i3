@@ -1,0 +1,15 @@
+# ~/.inputrc
+
+# tab completion menu settings
+set colored-stats On
+set visible-stats On
+set page-completions Off
+set skip-completed-text On
+set show-all-if-ambiguous On
+set completion-ignore-case On
+set enable-bracketed-paste On
+set echo-control-characters Off
+set colored-completion-prefix On
+set mark-symlinked-directories On
+set menu-complete-display-prefix On
+set print-completions-horizontally On
